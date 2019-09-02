@@ -1,0 +1,77 @@
+package Counting;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author moon
+ */
+public class CountingSort {
+
+    public static void main(String[] args){
+        int[] ary = {5,4,3,2,1,5,5,5,0,1,1,3,5,7,9};
+        //Range 
+        //getMax
+        int max = 0;
+        for(int i=0;i<ary.length;i++)
+        {
+            if(ary[i]>max){
+                max = ary[i];
+            }
+        }
+        
+        int temp_ary_length = max+1;
+        int[] temp_1 = new int[temp_ary_length];
+        for(int i=0;i<temp_1.length;i++){
+            temp_1[i] = 0;
+        }
+        
+        //Occurance 
+        for(int i=0;i<ary.length;i++){
+            int count  = 0;
+            for(int j=0;j<ary.length;j++){
+                if(ary[i]==ary[j]){
+                    count++;
+                }
+            }
+            temp_1[ary[i]] = count;
+        }
+        
+        //add with its left
+        for(int i=1;i<temp_1.length;i++){
+            temp_1[i]+=temp_1[i-1];
+        }
+        
+        //right Shift
+        for(int i = temp_1.length-1;i>0;i--){
+            temp_1[i] = temp_1[i-1];
+        }
+        
+        temp_1[0] = 0;
+        int[] temp_2 = new int[ary.length];
+        
+        for(int i=0;i<ary.length;i++){
+            int value = ary[i];
+            int position = temp_1[value];
+            temp_2[position] = value;
+            temp_1[value] = position+1;
+            
+        }
+        
+        
+        for(int i=0;i<temp_2.length;i++){
+            System.out.print(temp_2[i] + " , ");
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+}
